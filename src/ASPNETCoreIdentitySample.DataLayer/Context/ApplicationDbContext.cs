@@ -26,7 +26,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Context
     /// plus http://www.dotnettips.info/post/2491
     /// </summary>
     public class ApplicationDbContext :
-        IdentityDbContext<User, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>,
+        IdentityDbContext<User, Role, Guid, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>,
         IUnitOfWork
     {
         // we can't use constructor injection anymore, because we are using the `AddDbContextPool<>`

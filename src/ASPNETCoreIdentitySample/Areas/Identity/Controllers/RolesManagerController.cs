@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using System.Threading.Tasks;
 using ASPNETCoreIdentitySample.Services.Identity;
 using DNTBreadCrumb.Core;
+using System;
 
 namespace ASPNETCoreIdentitySample.Areas.Identity.Controllers
 {
@@ -136,9 +137,9 @@ namespace ASPNETCoreIdentitySample.Areas.Identity.Controllers
         }
 
         [BreadCrumb(Title = "لیست کاربران دارای نقش", Order = 1)]
-        public async Task<IActionResult> UsersInRole(int? id, int? page = 1, string field = "Id", SortOrder order = SortOrder.Ascending)
+        public async Task<IActionResult> UsersInRole(Guid? id, int? page = 1, string field = "Id", SortOrder order = SortOrder.Ascending)
         {
-            if (id == null)
+            if (id == null || id == Guid.Empty)
             {
                 return View("Error");
             }

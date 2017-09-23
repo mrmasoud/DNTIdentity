@@ -57,7 +57,7 @@ namespace ASPNETCoreIdentitySample.Services.Identity
             IHttpContextAccessor contextAccessor,
             IUnitOfWork uow,
             IUsedPasswordsService usedPasswordsService)
-            : base((UserStore<User, Role, ApplicationDbContext, int, UserClaim, UserRole, UserLogin, UserToken, RoleClaim>)store, optionsAccessor, passwordHasher, userValidators, passwordValidators, keyNormalizer, errors, services, logger)
+            : base((UserStore<User, Role, ApplicationDbContext, Guid, UserClaim, UserRole, UserLogin, UserToken, RoleClaim>)store, optionsAccessor, passwordHasher, userValidators, passwordValidators, keyNormalizer, errors, services, logger)
         {
             _userStore = store;
             _userStore.CheckArgumentIsNull(nameof(_userStore));
@@ -155,12 +155,12 @@ namespace ASPNETCoreIdentitySample.Services.Identity
 
         #region CustomMethods
 
-        public User FindById(int userId)
+        public User FindById(Guid userId)
         {
             return _users.Find(userId);
         }
 
-        public Task<User> FindByIdIncludeUserRolesAsync(int userId)
+        public Task<User> FindByIdIncludeUserRolesAsync(Guid userId)
         {
             return _users.Include(x => x.Roles).FirstOrDefaultAsync(x => x.Id == userId);
         }
@@ -183,7 +183,7 @@ namespace ASPNETCoreIdentitySample.Services.Identity
                 return null;
             }
 
-            var userId = int.Parse(currentUserId);
+            var userId = Guid.Parse(currentUserId);
             return _currentUserInScope = FindById(userId);
         }
 
@@ -198,7 +198,7 @@ namespace ASPNETCoreIdentitySample.Services.Identity
             return _contextAccessor.HttpContext.User.Identity.GetUserId();
         }
 
-        public int? CurrentUserId
+        public Guid? CurrentUserId
         {
             get
             {
@@ -208,8 +208,8 @@ namespace ASPNETCoreIdentitySample.Services.Identity
                     return null;
                 }
 
-                int result;
-                return !int.TryParse(userId, out result) ? (int?)null : result;
+                Guid result;
+                return !Guid.TryParse(userId, out result) ? (Guid?)null : result;
             }
         }
 
@@ -226,19 +226,19 @@ namespace ASPNETCoreIdentitySample.Services.Identity
             return _contextAccessor.HttpContext.User.Identity.GetUserName();
         }
 
-        public async Task<bool> HasPasswordAsync(int userId)
+        public async Task<bool> HasPasswordAsync(Guid userId)
         {
             var user = await FindByIdAsync(userId.ToString()).ConfigureAwait(false);
             return user?.PasswordHash != null;
         }
 
-        public async Task<bool> HasPhoneNumberAsync(int userId)
+        public async Task<bool> HasPhoneNumberAsync(Guid userId)
         {
             var user = await FindByIdAsync(userId.ToString()).ConfigureAwait(false);
             return user?.PhoneNumber != null;
         }
 
-        public async Task<byte[]> GetEmailImageAsync(int? userId)
+        public async Task<byte[]> GetEmailImageAsync(Guid? userId)
         {
             if (userId == null)
                 return TextToImage.EMailToImage("?");
@@ -274,8 +274,8 @@ namespace ASPNETCoreIdentitySample.Services.Identity
 
                 if (model.IsUserId)
                 {
-                    int userId;
-                    if (int.TryParse(model.TextToFind, out userId))
+                    Guid userId;
+                    if (Guid.TryParse(model.TextToFind, out userId))
                     {
                         query = query.Where(x => x.Id == userId);
                     }
@@ -363,7 +363,7 @@ namespace ASPNETCoreIdentitySample.Services.Identity
             };
         }
 
-        public async Task<IdentityResult> UpdateUserAndSecurityStampAsync(int userId, Action<User> action)
+        public async Task<IdentityResult> UpdateUserAndSecurityStampAsync(Guid userId, Action<User> action)
         {
             var user = await FindByIdIncludeUserRolesAsync(userId).ConfigureAwait(false);
             if (user == null)
@@ -385,7 +385,7 @@ namespace ASPNETCoreIdentitySample.Services.Identity
             return await UpdateSecurityStampAsync(user).ConfigureAwait(false);
         }
 
-        public async Task<IdentityResult> AddOrUpdateUserRolesAsync(int userId, IList<int> selectedRoleIds, Action<User> action = null)
+        public async Task<IdentityResult> AddOrUpdateUserRolesAsync(Guid userId, IList<Guid> selectedRoleIds, Action<User> action = null)
         {
             var user = await FindByIdIncludeUserRolesAsync(userId).ConfigureAwait(false);
             if (user == null)
@@ -401,7 +401,7 @@ namespace ASPNETCoreIdentitySample.Services.Identity
 
             if (selectedRoleIds == null)
             {
-                selectedRoleIds = new List<int>();
+                selectedRoleIds = new List<Guid>();
             }
             var newRolesToAdd = selectedRoleIds.Except(currentUserRoleIds).ToList();
             foreach (var roleId in newRolesToAdd)

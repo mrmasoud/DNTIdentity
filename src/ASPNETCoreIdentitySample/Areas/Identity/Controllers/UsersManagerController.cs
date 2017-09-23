@@ -8,6 +8,7 @@ using ASPNETCoreIdentitySample.ViewModels.Identity;
 using DNTBreadCrumb.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 
@@ -35,7 +36,7 @@ namespace ASPNETCoreIdentitySample.Areas.Identity.Controllers
 
         [AjaxOnly, HttpPost, ValidateAntiForgeryToken]
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> ActivateUserEmailStat(int userId)
+        public async Task<IActionResult> ActivateUserEmailStat(Guid userId)
         {
             User thisUser = null;
             var result = await _userManager.UpdateUserAndSecurityStampAsync(
@@ -54,7 +55,7 @@ namespace ASPNETCoreIdentitySample.Areas.Identity.Controllers
 
         [AjaxOnly, HttpPost, ValidateAntiForgeryToken]
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> ChangeUserLockoutMode(int userId, bool activate)
+        public async Task<IActionResult> ChangeUserLockoutMode(Guid userId, bool activate)
         {
             User thisUser = null;
             var result = await _userManager.UpdateUserAndSecurityStampAsync(
@@ -73,7 +74,7 @@ namespace ASPNETCoreIdentitySample.Areas.Identity.Controllers
 
         [AjaxOnly, HttpPost, ValidateAntiForgeryToken]
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> ChangeUserRoles(int userId, int[] roleIds)
+        public async Task<IActionResult> ChangeUserRoles(Guid userId, Guid[] roleIds)
         {
             User thisUser = null;
             var result = await _userManager.AddOrUpdateUserRolesAsync(
@@ -88,7 +89,7 @@ namespace ASPNETCoreIdentitySample.Areas.Identity.Controllers
 
         [AjaxOnly, HttpPost, ValidateAntiForgeryToken]
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> ChangeUserStat(int userId, bool activate)
+        public async Task<IActionResult> ChangeUserStat(Guid userId, bool activate)
         {
             User thisUser = null;
             var result = await _userManager.UpdateUserAndSecurityStampAsync(
@@ -107,7 +108,7 @@ namespace ASPNETCoreIdentitySample.Areas.Identity.Controllers
 
         [AjaxOnly, HttpPost, ValidateAntiForgeryToken]
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> ChangeUserTwoFactorAuthenticationStat(int userId, bool activate)
+        public async Task<IActionResult> ChangeUserTwoFactorAuthenticationStat(Guid userId, bool activate)
         {
             User thisUser = null;
             var result = await _userManager.UpdateUserAndSecurityStampAsync(
@@ -126,7 +127,7 @@ namespace ASPNETCoreIdentitySample.Areas.Identity.Controllers
 
         [AjaxOnly, HttpPost, ValidateAntiForgeryToken]
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> EndUserLockout(int userId)
+        public async Task<IActionResult> EndUserLockout(Guid userId)
         {
             User thisUser = null;
             var result = await _userManager.UpdateUserAndSecurityStampAsync(

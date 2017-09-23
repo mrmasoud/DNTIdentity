@@ -53,7 +53,7 @@ namespace ASPNETCoreIdentitySample.Services.Identity
             await _uow.SaveChangesAsync().ConfigureAwait(false);
         }
 
-        public async Task<DateTimeOffset?> GetLastUserPasswordChangeDateAsync(int userId)
+        public async Task<DateTimeOffset?> GetLastUserPasswordChangeDateAsync(Guid userId)
         {
             var lastPasswordHistory =
                 await _userUsedPasswords//.AsNoTracking() --> removes shadow properties
@@ -70,7 +70,7 @@ namespace ASPNETCoreIdentitySample.Services.Identity
             return (DateTimeOffset?) createdDateValue;
         }
 
-        public async Task<bool> IsLastUserPasswordTooOldAsync(int userId)
+        public async Task<bool> IsLastUserPasswordTooOldAsync(Guid userId)
         {
             var createdDateTime = await GetLastUserPasswordChangeDateAsync(userId).ConfigureAwait(false);
             if (createdDateTime == null)
@@ -86,7 +86,7 @@ namespace ASPNETCoreIdentitySample.Services.Identity
         /// </summary>
         public Task<bool> IsPreviouslyUsedPasswordAsync(User user, string newPassword)
         {
-            if (user.Id == 0)
+            if (user.Id == Guid.Empty)
             {
                 // A new user wants to register at our site
                 return Task.FromResult(false);

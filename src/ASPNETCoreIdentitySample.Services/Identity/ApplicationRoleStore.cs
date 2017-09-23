@@ -5,6 +5,7 @@ using ASPNETCoreIdentitySample.Entities.Identity;
 using ASPNETCoreIdentitySample.Services.Contracts.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System;
 
 namespace ASPNETCoreIdentitySample.Services.Identity
 {
@@ -12,7 +13,7 @@ namespace ASPNETCoreIdentitySample.Services.Identity
     /// More info: http://www.dotnettips.info/post/2578
     /// </summary>
     public class ApplicationRoleStore :
-        RoleStore<Role, ApplicationDbContext, int, UserRole, RoleClaim>,
+        RoleStore<Role, ApplicationDbContext, Guid, UserRole, RoleClaim>,
         IApplicationRoleStore
     {
         private readonly IUnitOfWork _uow;

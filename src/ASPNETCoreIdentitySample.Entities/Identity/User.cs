@@ -12,7 +12,7 @@ namespace ASPNETCoreIdentitySample.Entities.Identity
     /// and http://www.dotnettips.info/post/2578
     /// plus http://www.dotnettips.info/post/2559
     /// </summary>
-    public class User : IdentityUser<int>, IAuditableEntity
+    public class User : IdentityUser<Guid>, IAuditableEntity
     {
         public User()
         {

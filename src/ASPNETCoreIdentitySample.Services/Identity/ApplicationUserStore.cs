@@ -7,6 +7,7 @@ using ASPNETCoreIdentitySample.Entities.Identity;
 using ASPNETCoreIdentitySample.Services.Contracts.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using System;
 
 namespace ASPNETCoreIdentitySample.Services.Identity
 {
@@ -14,7 +15,7 @@ namespace ASPNETCoreIdentitySample.Services.Identity
     /// More info: http://www.dotnettips.info/post/2578
     /// </summary>
     public class ApplicationUserStore :
-        UserStore<User, Role, ApplicationDbContext, int, UserClaim, UserRole, UserLogin, UserToken, RoleClaim>,
+        UserStore<User, Role, ApplicationDbContext, Guid, UserClaim, UserRole, UserLogin, UserToken, RoleClaim>,
         IApplicationUserStore
     {
         private readonly IUnitOfWork _uow;
@@ -88,12 +89,12 @@ namespace ASPNETCoreIdentitySample.Services.Identity
             return base.FindTokenAsync(user, loginProvider, name, cancellationToken);
         }
 
-        Task<User> IApplicationUserStore.FindUserAsync(int userId, CancellationToken cancellationToken)
+        Task<User> IApplicationUserStore.FindUserAsync(Guid userId, CancellationToken cancellationToken)
         {
             return base.FindUserAsync(userId, cancellationToken);
         }
 
-        Task<UserLogin> IApplicationUserStore.FindUserLoginAsync(int userId, string loginProvider, string providerKey, CancellationToken cancellationToken)
+        Task<UserLogin> IApplicationUserStore.FindUserLoginAsync(Guid userId, string loginProvider, string providerKey, CancellationToken cancellationToken)
         {
             return base.FindUserLoginAsync(userId, loginProvider, providerKey, cancellationToken);
         }
@@ -103,7 +104,7 @@ namespace ASPNETCoreIdentitySample.Services.Identity
             return base.FindUserLoginAsync(loginProvider, providerKey, cancellationToken);
         }
 
-        Task<UserRole> IApplicationUserStore.FindUserRoleAsync(int userId, int roleId, CancellationToken cancellationToken)
+        Task<UserRole> IApplicationUserStore.FindUserRoleAsync(Guid userId, Guid roleId, CancellationToken cancellationToken)
         {
             return base.FindUserRoleAsync(userId, roleId, cancellationToken);
         }

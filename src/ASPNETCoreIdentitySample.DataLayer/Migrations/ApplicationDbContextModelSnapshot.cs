@@ -31,7 +31,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
                     b.Property<string>("CreatedByIp")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("CreatedByUserId");
+                    b.Property<Guid?>("CreatedByUserId");
 
                     b.Property<DateTimeOffset?>("CreatedDateTime");
 
@@ -41,7 +41,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
                     b.Property<string>("ModifiedByIp")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("ModifiedByUserId");
+                    b.Property<Guid?>("ModifiedByUserId");
 
                     b.Property<DateTimeOffset?>("ModifiedDateTime");
 
@@ -59,7 +59,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
 
             modelBuilder.Entity("ASPNETCoreIdentitySample.Entities.Identity.AppDataProtectionKey", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("FriendlyName");
@@ -77,7 +77,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
 
             modelBuilder.Entity("ASPNETCoreIdentitySample.Entities.Identity.AppLogItem", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("CreatedByBrowserName")
@@ -86,7 +86,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
                     b.Property<string>("CreatedByIp")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("CreatedByUserId");
+                    b.Property<Guid?>("CreatedByUserId");
 
                     b.Property<DateTimeOffset?>("CreatedDateTime");
 
@@ -104,7 +104,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
                     b.Property<string>("ModifiedByIp")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("ModifiedByUserId");
+                    b.Property<Guid?>("ModifiedByUserId");
 
                     b.Property<DateTimeOffset?>("ModifiedDateTime");
 
@@ -142,7 +142,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
 
             modelBuilder.Entity("ASPNETCoreIdentitySample.Entities.Identity.Role", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("ConcurrencyStamp")
@@ -154,7 +154,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
                     b.Property<string>("CreatedByIp")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("CreatedByUserId");
+                    b.Property<Guid?>("CreatedByUserId");
 
                     b.Property<DateTimeOffset?>("CreatedDateTime");
 
@@ -166,7 +166,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
                     b.Property<string>("ModifiedByIp")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("ModifiedByUserId");
+                    b.Property<Guid?>("ModifiedByUserId");
 
                     b.Property<DateTimeOffset?>("ModifiedDateTime");
 
@@ -201,7 +201,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
                     b.Property<string>("CreatedByIp")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("CreatedByUserId");
+                    b.Property<Guid?>("CreatedByUserId");
 
                     b.Property<DateTimeOffset?>("CreatedDateTime");
 
@@ -211,11 +211,11 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
                     b.Property<string>("ModifiedByIp")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("ModifiedByUserId");
+                    b.Property<Guid?>("ModifiedByUserId");
 
                     b.Property<DateTimeOffset?>("ModifiedDateTime");
 
-                    b.Property<int>("RoleId");
+                    b.Property<Guid>("RoleId");
 
                     b.HasKey("Id");
 
@@ -226,7 +226,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
 
             modelBuilder.Entity("ASPNETCoreIdentitySample.Entities.Identity.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("AccessFailedCount");
@@ -242,7 +242,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
                     b.Property<string>("CreatedByIp")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("CreatedByUserId");
+                    b.Property<Guid?>("CreatedByUserId");
 
                     b.Property<DateTimeOffset?>("CreatedDateTime");
 
@@ -275,7 +275,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
                     b.Property<string>("ModifiedByIp")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("ModifiedByUserId");
+                    b.Property<Guid?>("ModifiedByUserId");
 
                     b.Property<DateTimeOffset?>("ModifiedDateTime");
 
@@ -329,7 +329,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
                     b.Property<string>("CreatedByIp")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("CreatedByUserId");
+                    b.Property<Guid?>("CreatedByUserId");
 
                     b.Property<DateTimeOffset?>("CreatedDateTime");
 
@@ -339,11 +339,11 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
                     b.Property<string>("ModifiedByIp")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("ModifiedByUserId");
+                    b.Property<Guid?>("ModifiedByUserId");
 
                     b.Property<DateTimeOffset?>("ModifiedDateTime");
 
-                    b.Property<int>("UserId");
+                    b.Property<Guid>("UserId");
 
                     b.HasKey("Id");
 
@@ -364,7 +364,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
                     b.Property<string>("CreatedByIp")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("CreatedByUserId");
+                    b.Property<Guid?>("CreatedByUserId");
 
                     b.Property<DateTimeOffset?>("CreatedDateTime");
 
@@ -374,13 +374,13 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
                     b.Property<string>("ModifiedByIp")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("ModifiedByUserId");
+                    b.Property<Guid?>("ModifiedByUserId");
 
                     b.Property<DateTimeOffset?>("ModifiedDateTime");
 
                     b.Property<string>("ProviderDisplayName");
 
-                    b.Property<int>("UserId");
+                    b.Property<Guid>("UserId");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -391,9 +391,9 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
 
             modelBuilder.Entity("ASPNETCoreIdentitySample.Entities.Identity.UserRole", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<Guid>("UserId");
 
-                    b.Property<int>("RoleId");
+                    b.Property<Guid>("RoleId");
 
                     b.Property<string>("CreatedByBrowserName")
                         .HasMaxLength(1000);
@@ -401,7 +401,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
                     b.Property<string>("CreatedByIp")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("CreatedByUserId");
+                    b.Property<Guid?>("CreatedByUserId");
 
                     b.Property<DateTimeOffset?>("CreatedDateTime");
 
@@ -411,7 +411,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
                     b.Property<string>("ModifiedByIp")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("ModifiedByUserId");
+                    b.Property<Guid?>("ModifiedByUserId");
 
                     b.Property<DateTimeOffset?>("ModifiedDateTime");
 
@@ -424,7 +424,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
 
             modelBuilder.Entity("ASPNETCoreIdentitySample.Entities.Identity.UserToken", b =>
                 {
-                    b.Property<int>("UserId");
+                    b.Property<Guid>("UserId");
 
                     b.Property<string>("LoginProvider");
 
@@ -436,7 +436,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
                     b.Property<string>("CreatedByIp")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("CreatedByUserId");
+                    b.Property<Guid?>("CreatedByUserId");
 
                     b.Property<DateTimeOffset?>("CreatedDateTime");
 
@@ -446,7 +446,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
                     b.Property<string>("ModifiedByIp")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("ModifiedByUserId");
+                    b.Property<Guid?>("ModifiedByUserId");
 
                     b.Property<DateTimeOffset?>("ModifiedDateTime");
 
@@ -459,7 +459,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
 
             modelBuilder.Entity("ASPNETCoreIdentitySample.Entities.Identity.UserUsedPassword", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("CreatedByBrowserName")
@@ -468,7 +468,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
                     b.Property<string>("CreatedByIp")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("CreatedByUserId");
+                    b.Property<Guid?>("CreatedByUserId");
 
                     b.Property<DateTimeOffset?>("CreatedDateTime");
 
@@ -482,11 +482,11 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
                     b.Property<string>("ModifiedByIp")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("ModifiedByUserId");
+                    b.Property<Guid?>("ModifiedByUserId");
 
                     b.Property<DateTimeOffset?>("ModifiedDateTime");
 
-                    b.Property<int>("UserId");
+                    b.Property<Guid>("UserId");
 
                     b.HasKey("Id");
 
@@ -508,7 +508,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
                     b.Property<string>("CreatedByIp")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("CreatedByUserId");
+                    b.Property<Guid?>("CreatedByUserId");
 
                     b.Property<DateTimeOffset?>("CreatedDateTime");
 
@@ -518,7 +518,7 @@ namespace ASPNETCoreIdentitySample.DataLayer.Migrations
                     b.Property<string>("ModifiedByIp")
                         .HasMaxLength(255);
 
-                    b.Property<int?>("ModifiedByUserId");
+                    b.Property<Guid?>("ModifiedByUserId");
 
                     b.Property<DateTimeOffset?>("ModifiedDateTime");
 

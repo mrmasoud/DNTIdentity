@@ -213,7 +213,7 @@ namespace ASPNETCoreIdentitySample.Services.Contracts.Identity
 
         #region CustomMethods
 
-        IList<Role> FindUserRoles(int userId);
+        IList<Role> FindUserRoles(Guid userId);
 
         Task<List<Role>> GetAllCustomRolesAsync();
 
@@ -221,26 +221,26 @@ namespace ASPNETCoreIdentitySample.Services.Contracts.Identity
 
         IList<Role> GetRolesForCurrentUser();
 
-        IList<Role> GetRolesForUser(int userId);
+        IList<Role> GetRolesForUser(Guid userId);
 
         IList<UserRole> GetUserRolesInRole(string roleName);
 
         bool IsCurrentUserInRole(string roleName);
 
-        bool IsUserInRole(int userId, string roleName);
+        bool IsUserInRole(Guid userId, string roleName);
 
         IList<RoleAndUsersCountViewModel> GetAllCustomRolesAndUsersCountList();
 
         Task<PagedUsersListViewModel> GetPagedApplicationUsersInRoleListAsync(
-                int roleId,
+                Guid roleId,
                 int pageNumber, int recordsPerPage,
                 string sortByField, SortOrder sortOrder,
                 bool showAllUsers);
 
-        Task<Role> FindRoleIncludeRoleClaimsAsync(int roleId);
+        Task<Role> FindRoleIncludeRoleClaimsAsync(Guid roleId);
 
         Task<IdentityResult> AddOrUpdateRoleClaimsAsync(
-            int roleId,
+            Guid roleId,
             string roleClaimType,
             IList<string> selectedRoleClaimValues);
 

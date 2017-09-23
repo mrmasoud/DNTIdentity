@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using ASPNETCoreIdentitySample.Common.IdentityToolkit;
@@ -32,12 +31,12 @@ namespace ASPNETCoreIdentitySample.Entities.AuditableEntity
                                         entity => EF.Property<string>(entity, ModifiedByIp);
         public static readonly string ModifiedByIp = nameof(ModifiedByIp);
 
-        public static readonly Func<object, int?> EFPropertyCreatedByUserId =
-                                        entity => EF.Property<int?>(entity, CreatedByUserId);
+        public static readonly Func<object, Guid?> EFPropertyCreatedByUserId =
+                                        entity => EF.Property<Guid?>(entity, CreatedByUserId);
         public static readonly string CreatedByUserId = nameof(CreatedByUserId);
 
-        public static readonly Func<object, int?> EFPropertyModifiedByUserId =
-                                        entity => EF.Property<int?>(entity, ModifiedByUserId);
+        public static readonly Func<object, Guid?> EFPropertyModifiedByUserId =
+                                        entity => EF.Property<Guid?>(entity, ModifiedByUserId);
         public static readonly string ModifiedByUserId = nameof(ModifiedByUserId);
 
         public static readonly Func<object, DateTimeOffset?> EFPropertyCreatedDateTime =
@@ -66,9 +65,9 @@ namespace ASPNETCoreIdentitySample.Entities.AuditableEntity
                             .Property<string>(ModifiedByIp).HasMaxLength(255);
 
                 modelBuilder.Entity(entityType.ClrType)
-                            .Property<int?>(CreatedByUserId);
+                            .Property<Guid?>(CreatedByUserId);
                 modelBuilder.Entity(entityType.ClrType)
-                            .Property<int?>(ModifiedByUserId);
+                            .Property<Guid?>(ModifiedByUserId);
 
                 modelBuilder.Entity(entityType.ClrType)
                             .Property<DateTimeOffset?>(CreatedDateTime);
@@ -112,13 +111,13 @@ namespace ASPNETCoreIdentitySample.Entities.AuditableEntity
             }
         }
 
-        private static int? getUserId(HttpContext httpContext)
+        private static Guid? getUserId(HttpContext httpContext)
         {
-            int? userId = null;
+            Guid? userId = null;
             var userIdValue = httpContext?.User?.Identity?.GetUserId();
             if (!string.IsNullOrWhiteSpace(userIdValue))
             {
-                userId = int.Parse(userIdValue);
+                userId = Guid.Parse(userIdValue);
             }
             return userId;
         }

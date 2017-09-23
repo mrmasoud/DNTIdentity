@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using System;
 
 namespace ASPNETCoreIdentitySample.Services.Identity
 {
@@ -40,7 +41,7 @@ namespace ASPNETCoreIdentitySample.Services.Identity
             ILogger<ApplicationRoleManager> logger,
             IHttpContextAccessor contextAccessor,
             IUnitOfWork uow) :
-            base((RoleStore<Role, ApplicationDbContext, int, UserRole, RoleClaim>)store, roleValidators, keyNormalizer, errors, logger)
+            base((RoleStore<Role, ApplicationDbContext, Guid, UserRole, RoleClaim>)store, roleValidators, keyNormalizer, errors, logger)
         {
             _store = store;
             _store.CheckArgumentIsNull(nameof(_store));
@@ -78,7 +79,7 @@ namespace ASPNETCoreIdentitySample.Services.Identity
             return FindUserRoles(userId);
         }
 
-        public IList<Role> FindUserRoles(int userId)
+        public IList<Role> FindUserRoles(Guid userId)
         {
             var userRolesQuery = from role in Roles
                                  from user in role.Users
@@ -104,7 +105,7 @@ namespace ASPNETCoreIdentitySample.Services.Identity
         }
 
         public async Task<PagedUsersListViewModel> GetPagedApplicationUsersInRoleListAsync(
-                int roleId,
+                Guid roleId,
                 int pageNumber, int recordsPerPage,
                 string sortByField, SortOrder sortOrder,
                 bool showAllUsers)
@@ -162,7 +163,7 @@ namespace ASPNETCoreIdentitySample.Services.Identity
             return GetRolesForUser(userId);
         }
 
-        public IList<Role> GetRolesForUser(int userId)
+        public IList<Role> GetRolesForUser(Guid userId)
         {
             var roles = FindUserRoles(userId);
             if (roles == null || !roles.Any())
@@ -186,7 +187,7 @@ namespace ASPNETCoreIdentitySample.Services.Identity
             return IsUserInRole(userId, roleName);
         }
 
-        public bool IsUserInRole(int userId, string roleName)
+        public bool IsUserInRole(Guid userId, string roleName)
         {
             var userRolesQuery = from role in Roles
                                  where role.Name == roleName
@@ -197,13 +198,13 @@ namespace ASPNETCoreIdentitySample.Services.Identity
             return userRole != null;
         }
 
-        public Task<Role> FindRoleIncludeRoleClaimsAsync(int roleId)
+        public Task<Role> FindRoleIncludeRoleClaimsAsync(Guid roleId)
         {
             return Roles.Include(x => x.Claims).FirstOrDefaultAsync(x => x.Id == roleId);
         }
 
         public async Task<IdentityResult> AddOrUpdateRoleClaimsAsync(
-            int roleId,
+            Guid roleId,
             string roleClaimType,
             IList<string> selectedRoleClaimValues)
         {
@@ -250,7 +251,11 @@ namespace ASPNETCoreIdentitySample.Services.Identity
             return await UpdateAsync(role).ConfigureAwait(false);
         }
 
-        private int getCurrentUserId() => _contextAccessor.HttpContext.User.Identity.GetUserId<int>();
+        private Guid getCurrentUserId()
+        {
+            var id = _contextAccessor.HttpContext.User.Identity.GetUserId();
+            return Guid.Parse(id);
+        }
 
         #endregion
     }

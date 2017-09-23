@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace ASPNETCoreIdentitySample.IocConfig
 {
@@ -39,7 +40,7 @@ namespace ASPNETCoreIdentitySample.IocConfig
             services.AddScoped<IdentityErrorDescriber, CustomIdentityErrorDescriber>();
 
             services.AddScoped<IApplicationUserStore, ApplicationUserStore>();
-            services.AddScoped<UserStore<User, Role, ApplicationDbContext, int, UserClaim, UserRole, UserLogin, UserToken, RoleClaim>, ApplicationUserStore>();
+            services.AddScoped<UserStore<User, Role, ApplicationDbContext, Guid, UserClaim, UserRole, UserLogin, UserToken, RoleClaim>, ApplicationUserStore>();
 
             services.AddScoped<IApplicationUserManager, ApplicationUserManager>();
             services.AddScoped<UserManager<User>, ApplicationUserManager>();
@@ -51,7 +52,7 @@ namespace ASPNETCoreIdentitySample.IocConfig
             services.AddScoped<SignInManager<User>, ApplicationSignInManager>();
 
             services.AddScoped<IApplicationRoleStore, ApplicationRoleStore>();
-            services.AddScoped<RoleStore<Role, ApplicationDbContext, int, UserRole, RoleClaim>, ApplicationRoleStore>();
+            services.AddScoped<RoleStore<Role, ApplicationDbContext, Guid, UserRole, RoleClaim>, ApplicationRoleStore>();
 
             services.AddScoped<IEmailSender, AuthMessageSender>();
             services.AddScoped<ISmsSender, AuthMessageSender>();

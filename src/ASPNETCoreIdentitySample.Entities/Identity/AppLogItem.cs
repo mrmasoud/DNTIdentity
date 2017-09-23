@@ -5,7 +5,7 @@ namespace ASPNETCoreIdentitySample.Entities.Identity
 {
     public class AppLogItem : IAuditableEntity
     {
-        public int Id { set; get; }
+        public Guid Id { set; get; }
 
         public DateTimeOffset? CreatedDateTime { get; set; }
 

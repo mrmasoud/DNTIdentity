@@ -7,6 +7,7 @@ using ASPNETCoreIdentitySample.ViewModels.Identity;
 using DNTBreadCrumb.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace ASPNETCoreIdentitySample.Areas.Identity.Controllers
@@ -34,7 +35,7 @@ namespace ASPNETCoreIdentitySample.Areas.Identity.Controllers
         }
 
         [BreadCrumb(Title = "ایندکس", Order = 1)]
-        public async Task<IActionResult> Index(int? id)
+        public async Task<IActionResult> Index(Guid? id)
         {
             this.AddBreadCrumb(new BreadCrumb
             {

@@ -59,7 +59,8 @@ namespace ASPNETCoreIdentitySample.Areas.Identity.Controllers
         [BreadCrumb(Title = "ایندکس", Order = 1)]
         public async Task<IActionResult> Index()
         {
-            var userId = this.User.Identity.GetUserId<int>();
+            var t = this.User.Identity.GetUserId();
+            var userId = Guid.Parse(t);
             var passwordChangeDate = await _usedPasswordsService.GetLastUserPasswordChangeDateAsync(userId).ConfigureAwait(false);
             return View(model: new ChangePasswordViewModel
             {

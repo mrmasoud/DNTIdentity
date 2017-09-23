@@ -1000,7 +1000,7 @@ namespace ASPNETCoreIdentitySample.Services.Contracts.Identity
 
         #region CustomMethods
 
-        User FindById(int userId);
+        User FindById(Guid userId);
 
         Task<List<User>> GetAllUsersAsync();
 
@@ -1025,7 +1025,7 @@ namespace ASPNETCoreIdentitySample.Services.Contracts.Identity
         /// <summary>
         /// Returns the current User ID claim value if present otherwise returns null.
         /// </summary>
-        int? CurrentUserId { get; }
+        Guid? CurrentUserId { get; }
 
         /// <summary>
         /// Returns the current user Name claim value if present otherwise returns null.
@@ -1033,22 +1033,22 @@ namespace ASPNETCoreIdentitySample.Services.Contracts.Identity
         /// <returns>The current user Name claim value, or null if the claim is not present.</returns>
         string GetCurrentUserName();
 
-        Task<bool> HasPasswordAsync(int userId);
+        Task<bool> HasPasswordAsync(Guid userId);
 
-        Task<bool> HasPhoneNumberAsync(int userId);
+        Task<bool> HasPhoneNumberAsync(Guid userId);
 
-        Task<byte[]> GetEmailImageAsync(int? userId);
+        Task<byte[]> GetEmailImageAsync(Guid? userId);
 
         Task<PagedUsersListViewModel> GetPagedUsersListAsync(
                     int pageNumber, int recordsPerPage,
                     string sortByField, SortOrder sortOrder,
                     bool showAllUsers);
 
-        Task<User> FindByIdIncludeUserRolesAsync(int userId);
+        Task<User> FindByIdIncludeUserRolesAsync(Guid userId);
 
-        Task<IdentityResult> UpdateUserAndSecurityStampAsync(int userId, Action<User> action);
+        Task<IdentityResult> UpdateUserAndSecurityStampAsync(Guid userId, Action<User> action);
 
-        Task<IdentityResult> AddOrUpdateUserRolesAsync(int userId, IList<int> selectedRoleIds, Action<User> action = null);
+        Task<IdentityResult> AddOrUpdateUserRolesAsync(Guid userId, IList<Guid> selectedRoleIds, Action<User> action = null);
 
         Task<PagedUsersListViewModel> GetPagedUsersListAsync(SearchUsersViewModel model, int pageNumber);
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using ASPNETCoreIdentitySample.Common.WebToolkit;
 using ASPNETCoreIdentitySample.Entities.Identity;
+using System;
 
 namespace ASPNETCoreIdentitySample.ViewModels.Identity
 {
@@ -8,7 +9,7 @@ namespace ASPNETCoreIdentitySample.ViewModels.Identity
     {
         public string[] ActionIds { set; get; }
 
-        public int RoleId { set; get; }
+        public Guid RoleId { set; get; }
 
         public Role RoleIncludeRoleClaims { set; get; }
 

@@ -7,6 +7,7 @@ using ASPNETCoreIdentitySample.ViewModels.Identity;
 using DNTBreadCrumb.Core;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace ASPNETCoreIdentitySample.Areas.Identity.Controllers
 {
@@ -30,11 +31,12 @@ namespace ASPNETCoreIdentitySample.Areas.Identity.Controllers
         }
 
         [BreadCrumb(Title = "ایندکس", Order = 1)]
-        public async Task<IActionResult> Index(int? id)
+        public async Task<IActionResult> Index(Guid? id)
         {
             if (!id.HasValue && User.Identity.IsAuthenticated)
             {
-                id = User.Identity.GetUserId<int>();
+                var t = User.Identity.GetUserId();
+                id = Guid.Parse(t);
             }
 
             if (!id.HasValue)
@@ -59,7 +61,7 @@ namespace ASPNETCoreIdentitySample.Areas.Identity.Controllers
         }
 
         [ResponseCache(Location = ResponseCacheLocation.None, NoStore = true)]
-        public async Task<IActionResult> EmailToImage(int? id)
+        public async Task<IActionResult> EmailToImage(Guid? id)
         {
             if (!id.HasValue)
             {
